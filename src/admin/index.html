@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>CM Registry administration</title>
+        <style>
+            body {
+                font: 16px system-ui;
+                max-width: 1100px;
+                margin: 30px auto;
+                padding: 12px;
+                background: #fafafa;
+            }
+            button,
+            input,
+            textarea,
+            select {
+                padding: 8px;
+                margin: 4px;
+            }
+            pre {
+                white-space: pre-wrap;
+                overflow-wrap: anywhere;
+            }
+            article {
+                background: white;
+                border: 1px solid #ccc;
+                padding: 16px;
+                margin: 16px 0;
+            }
+            label {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Registry administration</h1>
+        <p>
+            Local development administrator credential. Keep this page on the loopback
+            server.
+        </p>
+        <label>
+            Admin token
+            <input id="token" type="password" autocomplete="off" />
+        </label>
+        <button id="load">Load records</button>
+        <p id="status" role="status"></p>
+        <main id="records"></main>
+        <script src="/admin/app.js"></script>
+    </body>
+</html>
