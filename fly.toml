@@ -1,0 +1,42 @@
+# Choose a globally unique app name and update REGISTRY_PUBLIC_ORIGIN to match.
+app = "cm-registry"
+primary_region = "sjc"
+kill_signal = "SIGTERM"
+kill_timeout = "30s"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  NODE_ENV = "production"
+  PORT = "8787"
+  REGISTRY_DATA = "/data"
+  REGISTRY_PUBLIC_ORIGIN = "https://cm-registry.fly.dev"
+  REGISTRY_ADMIN_PORT = "8788"
+
+[http_service]
+  internal_port = 8787
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    timeout = "5s"
+    method = "GET"
+    path = "/v1/extensions?limit=1"
+
+[[mounts]]
+  source = "registry_data"
+  destination = "/data"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory = "512mb"
+
+# Local SQLite and artifacts require exactly one Machine; deploy with --ha=false.
+# Schema initialization happens at startup on the mounted volume, not in a release_command.
+# Port 8788 is private: do not add it to http_service or services.

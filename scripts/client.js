@@ -7,7 +7,7 @@ import { loadOrCreateKey, RegistryClient } from '../src/client.js';
 const { values, positionals } = parseArgs({
     allowPositionals: true,
     options: {
-        registry: { type: 'string', default: 'http://127.0.0.1:8787' },
+        registry: { type: 'string', default: 'https://cm-registry.fly.dev' },
         'key-dir': { type: 'string', default: join(homedir(), '.config', 'cm-registry') },
         name: { type: 'string' },
         description: { type: 'string' },

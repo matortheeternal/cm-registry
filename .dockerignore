@@ -1,0 +1,12 @@
+node_modules
+.git
+.agents
+.aws
+.codex
+.idea
+.env
+.env.*
+var
+coverage
+test
+handoff.md
