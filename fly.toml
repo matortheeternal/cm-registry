@@ -31,6 +31,9 @@ kill_timeout = "30s"
 [[mounts]]
   source = "registry_data"
   destination = "/data"
+  auto_extend_size_threshold = 80
+  auto_extend_size_increment = "1GB" # Fly's minimum increment.
+  auto_extend_size_limit = "5GB"
 
 [[vm]]
   cpu_kind = "shared"
