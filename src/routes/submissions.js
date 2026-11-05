@@ -54,7 +54,7 @@ function createSubmission(context, submissions) {
         submissions.checkOwnership(publisherId, details.extensionId, details.type);
         if (extensionVersions.exists(details.extensionId, details.version))
             throw new VersionAlreadyReleased();
-        if (submissionQueries.countOutstanding(publisherId) >= 20)
+        if (submissionQueries.countOutstanding(publisherId) >= 100)
             throw new SubmissionQuotaExceeded();
         const slot = createUploadSlot(publisherId, details, {
             idempotencyKey: context.req.header('idempotency-key'), requestHash

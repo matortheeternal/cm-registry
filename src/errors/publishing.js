@@ -94,7 +94,7 @@ export class VersionAlreadyReleased extends Problem {
 
 export class SubmissionQuotaExceeded extends Problem {
     constructor() {
-        super(429, 'submission_quota', 'At most 20 submissions may be outstanding');
+        super(429, 'submission_quota', 'At most 100 submissions may be outstanding');
     }
 }
 

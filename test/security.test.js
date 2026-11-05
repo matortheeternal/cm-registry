@@ -83,11 +83,13 @@ test('public application rate limit and publisher outstanding quota', async t =>
     const f = fixture(t);
     const key = await keypair();
     await f.approve(key);
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 100; i++) {
         const r = await submission(f, key, undefined, 'extension-' + i);
         assert.equal(r.response.status, 201);
     }
-    assert.equal((await submission(f, key, undefined, 'overflow')).response.status, 429);
+    const overflow = await submission(f, key, undefined, 'overflow');
+    assert.equal(overflow.response.status, 429);
+    assert.equal(overflow.details.error.code, 'submission_quota');
     for (let i = 0; i < 20; i++)
         await f.fetch('/v1/access-requests', { method: 'POST', body: {} });
     assert.equal(
